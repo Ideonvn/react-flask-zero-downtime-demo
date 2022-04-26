@@ -1,17 +1,11 @@
 import logging
-import time
 
 import gunicorn.app.base
-from flask import Flask
 
 from server import (DEFAULT_LISTEN_ADDRESS, DEFAULT_LISTEN_PORT,
-                    DEFAULT_STATIC_FOLDER, DEFAULT_WORKER_TIMEOUT,
-                    DEFAULT_WORKERS_COUNT)
+                    DEFAULT_WORKER_TIMEOUT, DEFAULT_WORKERS_COUNT, app)
 from server.api import SystemInfo
 
-LOGGER = logging.getLogger(__name__)
-
-app = Flask(__name__, static_folder=DEFAULT_STATIC_FOLDER, static_url_path='/')
 system_info = SystemInfo()
 
 @app.route('/')
@@ -52,5 +46,5 @@ if __name__ == '__main__':
         'timeout': DEFAULT_WORKER_TIMEOUT,
         'reload': True,
     }
-    time.sleep(10)
+    # time.sleep(10)
     GunicornApplication(app, options).run()
