@@ -17,19 +17,19 @@ function App() {
           .then((resp) => {
             const status = resp.status;
             if(status === 200){
-              console.log(resp);
+              console.debug(resp);
               setErrorMessage(null);
               return resp.json();
             }
-            throw `Request failed with status ${status}`;
+            throw new Error(`Request failed with status ${status}`);
           })
           .catch((error) => {
-            setErrorMessage(error);
+            setErrorMessage(error.message);
             setLoading(false);
           })
           .then((data) => {
             const pids = { ...rows[data.hostname] };
-            console.log(pids);
+            console.debug(pids);
             setRows({
               ...rows,
               [data.hostname]: {
@@ -44,7 +44,7 @@ function App() {
       return () => {
         clearTimeout(timer);
       };
-  }, [loading]);
+  }, [loading, rows]);
 
   const error = errorMessage ? (
     <div>
@@ -61,7 +61,7 @@ function App() {
     }, 0);
 
     return (
-      <tr>
+      <tr key={hostname}>
         <td>
           {hostname}
         </td>

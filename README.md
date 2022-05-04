@@ -3,10 +3,16 @@
 ## Locally
 
 ```sh
-# Start flask
-cd web && python server
-# Start react
-npm start
+# Setup env
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r web/requirements.txt
+# Start database
+npm run database
+# Start backend
+npm run backend
+# Start frontend
+npm run frontend
 ```
 
 ## Build
