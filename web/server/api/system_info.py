@@ -31,7 +31,7 @@ class SystemInfo:
         db.create_all()
 
     def get_system_info(self):
-        hostname = f'{socket.gethostname()}_new',
+        hostname = f'{socket.gethostname()}_demo',
         pid = os.getpid()
 
         system_info = db.session.query(SystemInfoModal).filter_by(

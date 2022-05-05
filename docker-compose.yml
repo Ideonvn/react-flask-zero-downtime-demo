@@ -38,7 +38,7 @@ services:
       retries: 3
       start_period: 15s
     environment:
-      DEFAULT_DB_HOST_PORT: db
+      DB_HOST_PORT: db
   nginx:
     image: ideonvn-nginx
     build: ./nginx
